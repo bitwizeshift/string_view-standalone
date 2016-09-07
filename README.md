@@ -6,7 +6,7 @@
 [![Tested Compilers](https://img.shields.io/badge/compilers-gcc%20%7C%20clang-blue.svg)](#tested-compilers)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](http://bitwizeshift.github.io/string_view-standalone)
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/bitwizeshift/string_view-standalone/master/LICENSE.md)
-[![Github Releases](https://img.shields.io/github/release/bitwizeshift/Lazy.svg)](https://github.com/bitwizeshift/string_view-standalone/releases)
+[![Github Releases](https://img.shields.io/github/release/bitwizeshift/string_view-standalone.svg)](https://github.com/bitwizeshift/string_view-standalone/releases)
 
 ## What is `string_view` Standalone?
 
