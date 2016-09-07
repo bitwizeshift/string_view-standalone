@@ -244,12 +244,10 @@ TEST_CASE("string_view::at(size_t n)","[accessor]")
     REQUIRE( &view.at(0) == str );
   }
 
-#ifdef BFG_COMPILER_EXCEPTIONS_ENABLED
   SECTION("Throws when out of range")
   {
-    REQUIRE_THROWS_AS(view.at(11),std::out_of_range&);
+    REQUIRE_THROWS_AS( view.at(11), std::out_of_range );
   }
-#endif
 
 }
 
@@ -372,14 +370,12 @@ TEST_CASE("string_view::copy( char_type*, size_type, size_type )","[operation]")
 {
   bpstd::string_view view = "Hello World";
 
-#ifdef BFG_COMPILER_EXCEPTIONS_ENABLED
   SECTION("Throws std::out_of_range if pos >= view.size()")
   {
     char result[11];
 
-    REQUIRE_THROWS_AS( view.copy(result,11,11), std::out_of_range& );
+    REQUIRE_THROWS_AS( view.copy(result,11,11), std::out_of_range );
   }
-#endif
 
   SECTION("Copies entire string")
   {
@@ -451,12 +447,10 @@ TEST_CASE("string_view::substr( size_t, size_t )","[operation]")
     REQUIRE( substr=="World" );
   }
 
-#ifdef BFG_COMPILER_EXCEPTIONS_ENABLED
   SECTION("Throws std::out_of_range if pos > size")
   {
-    REQUIRE_THROWS_AS( view.substr(12), std::out_of_range& );
+    REQUIRE_THROWS_AS( view.substr(15), std::out_of_range );
   }
-#endif
 }
 
 //----------------------------------------------------------------------------

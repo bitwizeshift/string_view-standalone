@@ -12,7 +12,8 @@
 
 C++17 introduced lightweight, non-owning strings referred to as `string_view` to the standard. Unlike `std::string`, which performs memory allocations
 and copies for most string operations (such as `substr`), the `string_view` only observes and does not modify the entry.
-This can massively decrease the memory footprint and provide a large optimization for immutable strings for things like parsing and tokenization. 
+This can massively decrease the memory footprint and provide a large optimization for immutable strings for things like parsing and tokenization. As a 
+result, such a type can be an asset in older c++ versions for systems that may not support the newer standards.
 
 The full type, `basic_string_view` is templated on a both `CharT` and `Traits` to allow viewing of contiguous char-like sequences of data, and for
 simple conversion between `std::basic_string` and `basic_string_view`. 
@@ -21,9 +22,15 @@ This library is part of the [`BackportCpp` library](https://github.com/bitwizesh
 
 This library is written to be as-compatible with the c++17 spec as possible
 
-##<a name="references"></a> References
+## Rationale
 
-- [`basic_string_view` on cpp-reference](http://en.cppreference.com/w/cpp/string/basic_string_view)
+C++17 is still undergoing the standardization process (although currently is considered 'feature-complete'). Although non-owning strings are available in 
+many other libraries, such as boost, Bloomberg STD, QT -- all of them come with rather large dependencies and have slightly different functionality and
+signatures.
+
+By releasing this library as a standalone include, it provides future-proof support to older compilers with easy accessibility. 
+It also allows using the newer feature-set in older versions, and facilitates easy upgrades to the new standard as compilers upgrade and newer 
+c++ versions become available.
 
 ##<a name="tested-compilers"></a> Tested Compilers
 
@@ -72,3 +79,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+##<a name="references"></a> References
+
+- [`basic_string_view` on cpp-reference](http://en.cppreference.com/w/cpp/string/basic_string_view)
