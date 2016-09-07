@@ -2,9 +2,8 @@ CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic
 CXXFLAGS += -I ../include
 
 SOURCES = main.test.cpp \
-          pbstd/string_view.test.cpp
+          bpstd/string_view.test.cpp
 
-          
 OBJECTS = $(SOURCES:.cpp=.o)
 
 all: unit_tests
