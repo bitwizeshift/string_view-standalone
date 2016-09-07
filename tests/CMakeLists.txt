@@ -8,7 +8,7 @@ set(UNITTEST_TARGET_NAME "unit_tests")
 add_executable("unit_tests"
                "catch.hpp"
                "main.test.cpp"
-               "pbstd/string_view.test.cpp"
+               "bpstd/string_view.test.cpp"
 )
 
 set_target_properties(${UNITTEST_TARGET_NAME} PROPERTIES
