@@ -278,16 +278,19 @@ namespace bpstd {
                                            size_type pos )
     const
   {
+    if (v.size() > m_size) return npos;
+    if (v.empty()) return npos;
     const size_type max_index = m_size - v.size();
 
-    for( size_type i = pos; i < max_index; ++i ) {
+    for( size_type i = pos; i <= max_index; ++i ) {
       size_type j = v.size()-1;
-      for( ; j >= 0; --j ) {
+      for( ; ; --j ) {
         if( v[j] != m_str[i+j] ) {
           break;
         }
+        if (j==0) break;
       }
-      if((j+1)==0) return i;
+      if(j==0) return i;
     }
     return npos;
   }
@@ -327,6 +330,8 @@ namespace bpstd {
                                             size_type pos )
     const
   {
+    if (v.size() > m_size) return npos;
+    if (v.empty()) return npos;
     const size_type max_index = m_size - v.size();
 
     for( size_type i = std::min(max_index-1,pos); i >= 0; --i ) {
