@@ -1,24 +1,21 @@
-cmake_minimum_required(VERSION 3.0)
-project(unit_test LANGUAGES CXX)
-
-enable_testing()
-
 # The unit test executable.
 set(UNITTEST_TARGET_NAME "unit_tests")
-add_executable("unit_tests"
-               "catch.hpp"
-               "main.test.cpp"
-               "bpstd/string_view.test.cpp"
+
+set(source_files
+    "main.test.cpp"
+    "bpstd/string_view.test.cpp"
 )
+
+add_executable(unit_tests ${source_files})
+
+target_link_libraries(unit_tests PRIVATE ${PROJECT_NAME})
 
 set_target_properties(${UNITTEST_TARGET_NAME} PROPERTIES
-    CXX_STANDARD 11
-    CXX_STANDARD_REQUIRED ON
-    COMPILE_DEFINITIONS "$<$<CXX_COMPILER_ID:MSVC>:_SCL_SECURE_NO_WARNINGS>"
-    COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/EHsc;$<$<CONFIG:Release>:/Od>>"
+  CXX_STANDARD 11
+  CXX_STANDARD_REQUIRED ON
+  COMPILE_DEFINITIONS "$<$<CXX_COMPILER_ID:MSVC>:_SCL_SECURE_NO_WARNINGS>"
+  COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/EHsc;$<$<CONFIG:Release>:/Od>>"
 )
-
-target_include_directories(${UNITTEST_TARGET_NAME} PRIVATE "../include")
 
 add_test(NAME "${UNITTEST_TARGET_NAME}_default"
          COMMAND ${UNITTEST_TARGET_NAME}
