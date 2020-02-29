@@ -16,7 +16,7 @@ if (NOT CMAKE_TESTING_ENABLED AND BPSTD_COMPILE_UNIT_TESTS)
 endif ()
 
 project(string_view_standalone
-  VERSION "1.0.0"
+  VERSION "1.1.0"
   LANGUAGES CXX
 )
 

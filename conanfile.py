@@ -6,7 +6,7 @@ class StringViewStandaloneConan(ConanFile):
 
   # Package Info
   name = "StringViewStandalone"
-  version = "1.0.0"
+  version = "1.1.0"
   description = "Modern C++ compatible string_view implementation"
   url = "https://github.com/bitwizeshift/string_view-standalone"
   author = "Matthew Rodusek <matthew.rodusek@gmail.com>"
