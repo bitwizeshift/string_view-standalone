@@ -455,6 +455,634 @@ TEST_CASE("string_view::substr( size_t, size_t )","[operation]")
 
 //----------------------------------------------------------------------------
 
+TEST_CASE("string_view::find", "[operations]")
+{
+  SECTION("Empty string view")
+  {
+    const auto sut = bpstd::string_view{""};
+    SECTION("Argument is empty")
+    {
+      const auto result = sut.find("");
+      SECTION("Returns 0")
+      {
+        REQUIRE( result == 0u );
+      }
+    }
+    SECTION("Non-empty argument")
+    {
+      SECTION("Offset is out of string")
+      {
+        const auto result = sut.find("hello", 100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+  }
+  SECTION("Non-empty string view")
+  {
+    const auto sut = bpstd::string_view{"hello hello world"};
+    SECTION("Argument is empty")
+    {
+      SECTION("Offset is in string")
+      {
+        const auto result = sut.find("", 5);
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 5u );
+        }
+      }
+      SECTION("Offset is out of string")
+      {
+        const auto result = sut.find("", 100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+    SECTION("argument in string, offset at 0")
+    {
+      SECTION("At start of string")
+      {
+        const auto result = sut.find("hello");
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 0u );
+        }
+      }
+      SECTION("At end of string")
+      {
+        const auto result = sut.find("world");
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 12u );
+        }
+      }
+      SECTION("in middle of string")
+      {
+        const auto result = sut.find(" ");
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 5u );
+        }
+      }
+    }
+    SECTION("argument in string, offset in string")
+    {
+      const auto result = sut.find("hello", 5);
+      SECTION("Returns position")
+      {
+        REQUIRE( result == 6u );
+      }
+    }
+    SECTION("Argument is string (identity)")
+    {
+      const auto result = sut.find(sut);
+      SECTION("Returns position")
+      {
+        REQUIRE( result == 0u );
+      }
+    }
+  }
+}
+
+TEST_CASE("string_view::rfind", "[operations]")
+{
+  SECTION("Empty string view")
+  {
+    const auto sut = bpstd::string_view{""};
+    SECTION("Argument is empty")
+    {
+      const auto result = sut.rfind("");
+      SECTION("Returns 0")
+      {
+        REQUIRE( result == 0u );
+      }
+    }
+    SECTION("Non-empty argument")
+    {
+      SECTION("Offset is out of string")
+      {
+        const auto result = sut.rfind("hello", 100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+  }
+  SECTION("Non-empty string view")
+  {
+    const auto sut = bpstd::string_view{"hello world world"};
+    SECTION("Argument is empty")
+    {
+      SECTION("Offset is in string")
+      {
+        const auto result = sut.rfind("", 5);
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 5u );
+        }
+      }
+      SECTION("Offset is out of string")
+      {
+        const auto result = sut.rfind("", 100);
+        SECTION("Returns last index")
+        {
+          REQUIRE( result == (sut.size() - 1) );
+        }
+      }
+    }
+    SECTION("argument in string, offset at end")
+    {
+      SECTION("At start of string")
+      {
+        const auto result = sut.rfind("hello");
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 0u );
+        }
+      }
+      SECTION("At end of string")
+      {
+        const auto result = sut.rfind("world");
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 12u );
+        }
+      }
+      SECTION("in middle of string")
+      {
+        const auto result = sut.rfind(" ");
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 11u );
+        }
+      }
+    }
+    SECTION("argument in string, offset in string")
+    {
+      const auto result = sut.rfind("world", 10u);
+      SECTION("Returns position")
+      {
+        REQUIRE( result == 6u );
+      }
+    }
+    SECTION("Argument is string (identity)")
+    {
+      const auto result = sut.rfind(sut);
+      SECTION("Returns position")
+      {
+        REQUIRE( result == 0u );
+      }
+    }
+  }
+}
+
+TEST_CASE("string_view::find_first_of", "[operations]")
+{
+  SECTION("Empty string view")
+  {
+    const auto sut = bpstd::string_view{""};
+    SECTION("Characters to search are empty")
+    {
+      SECTION("Position is out-of-bounds")
+      {
+        const auto result = sut.find_first_of("",100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+      SECTION("Position is in-bounds")
+      {
+        const auto result = sut.find_first_of("",0);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+  }
+
+  SECTION("Non-empty string view")
+  {
+    const auto sut = bpstd::string_view{"Hello world"};
+
+    SECTION("Characters to search are empty")
+    {
+      SECTION("Position is out-of-bounds")
+      {
+        const auto result = sut.find_first_of("",100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+      SECTION("Position is in-bounds")
+      {
+        const auto result = sut.find_first_of("",5);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+
+    SECTION("Characters to search are non-empty")
+    {
+      SECTION("Characters are in the string")
+      {
+        SECTION("Offset by index")
+        {
+          const auto result = sut.find_first_of("l",5);
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 9u );
+          }
+        }
+        SECTION("Match is at the beginning")
+        {
+          const auto result = sut.find_first_of("zH!");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 0u );
+          }
+        }
+
+        SECTION("Match is at the end")
+        {
+          const auto result = sut.find_first_of("zd~");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == (sut.size() - 1) );
+          }
+        }
+
+        SECTION("Match is in the middle")
+        {
+          const auto result = sut.find_first_of("5 2_");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 5u );
+          }
+        }
+
+        SECTION("Match contains duplicate")
+        {
+          const auto result = sut.find_first_of("l15");
+          SECTION("Returns first found letter")
+          {
+            REQUIRE( result == 2u );
+          }
+        }
+      }
+      SECTION("Characters are not in the string")
+      {
+        const auto result = sut.find_first_of("12-09'");
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+  }
+}
+
+TEST_CASE("string_view::find_first_not_of", "[operations]")
+{
+  SECTION("Empty string view")
+  {
+    const auto sut = bpstd::string_view{""};
+    SECTION("Characters to search are empty")
+    {
+      SECTION("Position is out-of-bounds")
+      {
+        const auto result = sut.find_first_not_of("",100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+      SECTION("Position is in-bounds")
+      {
+        const auto result = sut.find_first_not_of("",0);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+  }
+
+  SECTION("Non-empty string view")
+  {
+    const auto sut = bpstd::string_view{"Hello world"};
+
+    SECTION("Characters to search are empty")
+    {
+      SECTION("Offset by index")
+      {
+        const auto result = sut.find_first_of("l",5);
+        SECTION("Returns expected index")
+        {
+          REQUIRE( result == 9u );
+        }
+      }
+      SECTION("Position is out-of-bounds")
+      {
+        const auto result = sut.find_first_not_of("",100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+      SECTION("Position is in-bounds")
+      {
+        const auto result = sut.find_first_not_of("",5);
+        SECTION("Returns position")
+        {
+          REQUIRE( result == 5u );
+        }
+      }
+    }
+
+    SECTION("Characters to search are non-empty")
+    {
+      SECTION("Characters are in the string")
+      {
+        SECTION("Match is at the beginning")
+        {
+          const auto result = sut.find_first_not_of("elo");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 0u );
+          }
+        }
+
+        SECTION("Match is at the end")
+        {
+          const auto result = sut.find_first_not_of("Helo wr");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == (sut.size() - 1) );
+          }
+        }
+
+        SECTION("Match is in the middle")
+        {
+          const auto result = sut.find_first_not_of("Helowrd");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 5u );
+          }
+        }
+
+        SECTION("Match contains duplicate")
+        {
+          const auto result = sut.find_first_not_of("Heo");
+          SECTION("Returns first found letter")
+          {
+            REQUIRE( result == 2u );
+          }
+        }
+      }
+      SECTION("Characters are not in the string")
+      {
+        const auto result = sut.find_first_not_of("123");
+        SECTION("Returns 0")
+        {
+          REQUIRE( result == 0u );
+        }
+      }
+    }
+  }
+}
+
+TEST_CASE("string_view::find_last_of", "[operations]")
+{
+  SECTION("Empty string view")
+  {
+    const auto sut = bpstd::string_view{""};
+    SECTION("Characters to search are empty")
+    {
+      SECTION("Position is out-of-bounds")
+      {
+        const auto result = sut.find_last_of("",100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+      SECTION("Position is in-bounds")
+      {
+        const auto result = sut.find_last_of("",0);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+  }
+
+  SECTION("Non-empty string view")
+  {
+    const auto sut = bpstd::string_view{"Hello world"};
+
+    SECTION("Characters to search are empty")
+    {
+      SECTION("Position is out-of-bounds")
+      {
+        const auto result = sut.find_last_of("",100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+      SECTION("Position is in-bounds")
+      {
+        const auto result = sut.find_last_of("",5);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+
+    SECTION("Characters to search are non-empty")
+    {
+      SECTION("Characters are in the string")
+      {
+        SECTION("Offset by index")
+        {
+          const auto result = sut.find_last_of("l",5);
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 3u );
+          }
+        }
+        SECTION("Match is at the beginning")
+        {
+          const auto result = sut.find_last_of("zH!");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 0u );
+          }
+        }
+
+        SECTION("Match is at the end")
+        {
+          const auto result = sut.find_last_of("zd~");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == (sut.size() - 1) );
+          }
+        }
+
+        SECTION("Match is in the middle")
+        {
+          const auto result = sut.find_last_of("5 2_");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 5u );
+          }
+        }
+
+        SECTION("Match contains duplicate")
+        {
+          const auto result = sut.find_last_of("l15");
+          SECTION("Returns first found letter")
+          {
+            REQUIRE( result == 9u );
+          }
+        }
+      }
+      SECTION("Characters are not in the string")
+      {
+        const auto result = sut.find_last_of("12-09'");
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+  }
+}
+
+TEST_CASE("string_view::find_last_not_of", "[operations]")
+{
+  SECTION("Empty string view")
+  {
+    const auto sut = bpstd::string_view{""};
+    SECTION("Characters to search are empty")
+    {
+      SECTION("Position is out-of-bounds")
+      {
+        const auto result = sut.find_last_not_of("",100);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+      SECTION("Position is in-bounds")
+      {
+        const auto result = sut.find_last_not_of("",0);
+        SECTION("Returns npos")
+        {
+          REQUIRE( result == bpstd::string_view::npos );
+        }
+      }
+    }
+  }
+
+  SECTION("Non-empty string view")
+  {
+    const auto sut = bpstd::string_view{"Hello world"};
+
+    SECTION("Characters to search are empty")
+    {
+      SECTION("Offset by index")
+      {
+        const auto result = sut.find_last_not_of("l",5);
+        SECTION("Returns expected index")
+        {
+          REQUIRE( result == (sut.size() - 5u - 1u) );
+        }
+      }
+      SECTION("Position is out-of-bounds")
+      {
+        const auto result = sut.find_last_not_of("",100);
+        SECTION("Returns last index")
+        {
+          REQUIRE( result == (sut.size() - 1) );
+        }
+      }
+      SECTION("Position is in-bounds")
+      {
+        const auto result = sut.find_last_not_of("",5);
+        SECTION("Returns position")
+        {
+          REQUIRE( result == (sut.size() - 5u - 1u) );
+        }
+      }
+    }
+
+    SECTION("Characters to search are non-empty")
+    {
+      SECTION("Characters are in the string")
+      {
+        SECTION("Match is at the beginning")
+        {
+          const auto result = sut.find_last_not_of("elo wrd");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 0u );
+          }
+        }
+
+        SECTION("Match is at the end")
+        {
+          const auto result = sut.find_last_not_of("Helo wr");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == (sut.size() - 1) );
+          }
+        }
+
+        SECTION("Match is in the middle")
+        {
+          const auto result = sut.find_last_not_of("Helowrd");
+          SECTION("Returns expected index")
+          {
+            REQUIRE( result == 5u );
+          }
+        }
+
+        SECTION("Match contains duplicate")
+        {
+          const auto result = sut.find_last_not_of("Heowrd ");
+          SECTION("Returns first found letter")
+          {
+            REQUIRE( result == 9u );
+          }
+        }
+      }
+      SECTION("Characters are not in the string")
+      {
+        const auto result = sut.find_last_not_of("123");
+        SECTION("Returns end index")
+        {
+          REQUIRE( result == (sut.size() - 1) );
+        }
+      }
+    }
+  }
+}
+
+//----------------------------------------------------------------------------
+
 TEST_CASE("string_view::compare( string_view )","[comparison]")
 {
   SECTION("Returns 0 for identical views")
@@ -598,7 +1226,7 @@ TEST_CASE("string_view::operator==(...)","[comparison]")
 
 //----------------------------------------------------------------------------
 
-TEST_CASE("string_view::operator!=(...)","[compariso]")
+TEST_CASE("string_view::operator!=(...)","[comparison]")
 {
   bpstd::string_view view = "Hello World";
 
@@ -710,4 +1338,3 @@ TEST_CASE("string_view::operator>=(...)","[comparison]")
 {
 
 }
-
