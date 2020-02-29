@@ -1,6 +1,8 @@
 # The unit test executable.
 set(UNITTEST_TARGET_NAME "unit_tests")
 
+find_package(Catch2 REQUIRED)
+
 set(source_files
     "main.test.cpp"
     "bpstd/string_view.test.cpp"
@@ -8,7 +10,10 @@ set(source_files
 
 add_executable(unit_tests ${source_files})
 
-target_link_libraries(unit_tests PRIVATE ${PROJECT_NAME})
+target_link_libraries(unit_tests
+  PRIVATE ${PROJECT_NAME}
+  PRIVATE Catch2::Catch2
+)
 
 set_target_properties(${UNITTEST_TARGET_NAME} PROPERTIES
   CXX_STANDARD 11

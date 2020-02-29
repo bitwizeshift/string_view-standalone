@@ -6,11 +6,11 @@
  * \author Matthew Rodusek (matthew.rodusek@gmail.com)
  */
 
-#include "../catch.hpp"
-
 #include <bpstd/string_view.hpp>
 #include <string>
 #include <cstring>
+
+#include <catch2/catch.hpp>
 
 //----------------------------------------------------------------------------
 // Constructors
