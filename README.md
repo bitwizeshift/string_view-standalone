@@ -18,7 +18,11 @@ result, such a type can be an asset in older c++ versions for systems that may n
 The full type, `basic_string_view` is templated on a both `CharT` and `Traits` to allow viewing of contiguous char-like sequences of data, and for
 simple conversion between `std::basic_string` and `basic_string_view`.
 
-This library is written to be as-compatible with the c++17 spec as possible
+----------------------------
+
+This `string_view` implementation is from the [**BackportCpp**](https://github.com/bitwizeshift/BackportCpp) library, which aims to
+backport library types and utilities from C++14, C++17, and C++20 to be compatible with C++11 compilers. This standalone 
+library simply offers a subset for those looking for a simple drop-in `string_view` implementation.
 
 ## Rationale
 
