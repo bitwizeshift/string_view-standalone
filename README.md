@@ -60,7 +60,7 @@ does not properly work on g++ before 4.8
 
 The class is licensed under the [MIT License](http://opensource.org/licenses/MIT):
 
-> Copyright &copy; 2016 [Matthew Rodusek](http://rodusek.me/)
+> Copyright &copy; 2016-2021 [Matthew Rodusek](http://bitwizeshift.github.com/)
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
