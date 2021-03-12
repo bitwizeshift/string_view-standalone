@@ -15,16 +15,6 @@ target_link_libraries(unit_tests
   PRIVATE Catch2::Catch2
 )
 
-if ( "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" OR
-     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
-  target_compile_options(unit_tests
-    PRIVATE -Wall -Werror -Wextra -pedantic -pendantic-errors
-  )
-elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
-  # TODO: Determine MSVC necessary compiler flags
-endif ()
-
-
 set_target_properties(${UNITTEST_TARGET_NAME} PROPERTIES
   CXX_STANDARD 11
   CXX_STANDARD_REQUIRED ON
