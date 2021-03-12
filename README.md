@@ -3,6 +3,7 @@
 [![Ubuntu Build Status](https://github.com/bitwizeshift/string_view-standalone/workflows/Ubuntu/badge.svg?branch=master)](https://github.com/bitwizeshift/string_view-standalone/actions?query=workflow%3AUbuntu)
 [![macOS Build Status](https://github.com/bitwizeshift/string_view-standalone/workflows/macOS/badge.svg?branch=master)](https://github.com/bitwizeshift/string_view-standalone/actions?query=workflow%3AmacOS)
 [![Windows Build Status](https://github.com/bitwizeshift/string_view-standalone/workflows/Windows/badge.svg?branch=master)](https://github.com/bitwizeshift/string_view-standalone/actions?query=workflow%3AWindows)
+[![Coverage Status](https://coveralls.io/repos/github/bitwizeshift/string_view-standalone/badge.svg?branch=master)](https://coveralls.io/github/bitwizeshift/string_view-standalone?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/bitwizeshift/string_view-standalone.svg)](http://github.com/bitwizeshift/string_view-standalone/issues)
 <br/>
 [![Github Releases](https://img.shields.io/github/release/bitwizeshift/string_view-standalone.svg)](https://github.com/bitwizeshift/string_view-standalone/releases)
