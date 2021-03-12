@@ -1,12 +1,15 @@
 # `string_view` Standalone
 
-[![Build Status](https://travis-ci.org/bitwizeshift/string_view-standalone.svg?branch=master)](https://travis-ci.org/bitwizeshift/string_view-standalone)
-[![Build status](https://ci.appveyor.com/api/projects/status/98yc6b07luvi8b7j?svg=true)](https://ci.appveyor.com/project/bitwizeshift/string-view-standalone)
+[![Ubuntu Build Status](https://github.com/bitwizeshift/string_view-standalone/workflows/Ubuntu/badge.svg?branch=master)](https://github.com/bitwizeshift/string_view-standalone/actions?query=workflow%3AUbuntu)
+[![macOS Build Status](https://github.com/bitwizeshift/string_view-standalone/workflows/macOS/badge.svg?branch=master)](https://github.com/bitwizeshift/string_view-standalone/actions?query=workflow%3AmacOS)
+[![Windows Build Status](https://github.com/bitwizeshift/string_view-standalone/workflows/Windows/badge.svg?branch=master)](https://github.com/bitwizeshift/string_view-standalone/actions?query=workflow%3AWindows)
+[![Coverage Status](https://coveralls.io/repos/github/bitwizeshift/string_view-standalone/badge.svg?branch=master)](https://coveralls.io/github/bitwizeshift/string_view-standalone?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/bitwizeshift/string_view-standalone.svg)](http://github.com/bitwizeshift/string_view-standalone/issues)
+<br/>
+[![Github Releases](https://img.shields.io/github/release/bitwizeshift/string_view-standalone.svg)](https://github.com/bitwizeshift/string_view-standalone/releases)
 [![Tested Compilers](https://img.shields.io/badge/compilers-gcc%20%7C%20clang-blue.svg)](#tested-compilers)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](http://bitwizeshift.github.io/string_view-standalone)
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/bitwizeshift/string_view-standalone/master/LICENSE.md)
-[![Github Releases](https://img.shields.io/github/release/bitwizeshift/string_view-standalone.svg)](https://github.com/bitwizeshift/string_view-standalone/releases)
 
 ## What is `string_view` Standalone?
 
@@ -62,7 +65,7 @@ does not properly work on g++ before 4.8
 
 The class is licensed under the [MIT License](http://opensource.org/licenses/MIT):
 
-> Copyright &copy; 2016 [Matthew Rodusek](http://rodusek.me/)
+> Copyright &copy; 2016-2021 [Matthew Rodusek](http://bitwizeshift.github.com/)
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
