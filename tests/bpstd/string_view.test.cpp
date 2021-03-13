@@ -545,6 +545,23 @@ TEST_CASE("string_view::find", "[operations]")
         REQUIRE( result == 0u );
       }
     }
+    SECTION("Argument is string, offset in string, no match")
+    {
+        bpstd::string_view s1 = "01234567890ABCDEFGHIJ";
+        bpstd::string_view s2 = "01";
+
+        auto result = s1.find(s2);
+        SECTION("prefix find ok")
+        {
+            REQUIRE(result != bpstd::string_view::npos);
+            REQUIRE(s1.size() > 10);
+        }
+        auto result1 = s1.find(s2, 10);
+        SECTION("nonmatching substring")
+        {
+            REQUIRE(result1 == bpstd::string_view::npos);
+        }
+    }
   }
 }
 

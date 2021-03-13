@@ -293,7 +293,7 @@ namespace bpstd {
     }
 
     const auto offset = pos;
-    const auto increments = size() - v.size();
+    const auto increments = size() - v.size() - offset;
 
     for (auto i = 0u; i <= increments; ++i) {
       const auto j = i + offset;
